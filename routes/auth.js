@@ -45,4 +45,12 @@ router.post("/register", async (req, res, next) => {
 	}
 });
 
+router.get("/register", (req, res, next) => {
+	try {
+		return res.render("register.html");
+	} catch (err) {
+		return next(err);
+	}
+});
+
 module.exports = router;

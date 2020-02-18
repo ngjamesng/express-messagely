@@ -3,6 +3,7 @@
 
 const express = require("express");
 const cors = require("cors");
+const nunjucks = require("nunjucks");
 const { authenticateJWT } = require("./middleware/auth");
 
 const ExpressError = require("./expressError")
@@ -11,6 +12,11 @@ const app = express();
 // allow both form-encoded and json body parsing
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+
+nunjucks.configure("templates", {
+  autoescape: true,
+  express: app
+});
 
 // allow connections to all routes from any browser
 app.use(cors());
