@@ -33,8 +33,9 @@ class User {
       WHERE username = $1`,
 			[ username ]
 		);
-
 		const user = result.rows[0];
+		if (!result.rows[0]) throw new ExpressError(`No such user: ${username}`, 400);
+
 		let validPassword = await bcrypt.compare(password, user.password);
 		return user && validPassword;
 	}
